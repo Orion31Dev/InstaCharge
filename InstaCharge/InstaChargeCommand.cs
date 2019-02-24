@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace InstaCharge
 {
@@ -14,32 +13,29 @@ namespace InstaCharge
 
         public void OnConsoleCommand_charge()
         {
-            PlayerTool item = Inventory.main.GetHeldTool();
-            EnergyMixin energyMixin = item.GetComponent<EnergyMixin>();
-
-            ErrorMessage.AddMessage("Charged.");
+            EnergyMixin energyMixin = Inventory.main.GetHeldTool().GetComponent<EnergyMixin>();
             energyMixin.ModifyCharge(energyMixin.capacity);
+            ErrorMessage.AddMessage("Charged.");
         }
 
         public void OnConsoleCommand_chargeto(NotificationCenter.Notification n)
         {
-            PlayerTool item = Inventory.main.GetHeldTool();
-            EnergyMixin energyMixin = item.GetComponent<EnergyMixin>();
-
+            EnergyMixin energyMixin = Inventory.main.GetHeldTool().GetComponent<EnergyMixin>();
             if (n.data.Count != 1)
             {
                 ErrorMessage.AddMessage("Usage: chargeto [amount]");
                 return;
             }
 
-            if ((float.TryParse((string)n.data[0], out float newCharge)))
+            if (float.TryParse((string)n.data[0], out float newCharge))
             {
-                ErrorMessage.AddMessage("Charged from " + energyMixin.charge + " to " + ((newCharge > energyMixin.capacity) ? energyMixin.capacity : newCharge) + ".");
-                energyMixin.ModifyCharge(newCharge - energyMixin.charge);
-                return;
-            } else
+                float oldCharge = energyMixin.charge;
+                energyMixin.ModifyCharge(newCharge - oldCharge);
+                Messenger.AddMessage("Charged to " + ((newCharge > energyMixin.capacity) ? energyMixin.capacity : newCharge) + ".");
+            }
+            else
             {
-                ErrorMessage.AddMessage("Amount must be number.");
+                Messenger.AddMessage("Amount must be number.");
             }
         }
 
