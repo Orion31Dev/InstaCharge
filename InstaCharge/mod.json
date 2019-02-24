@@ -1,0 +1,11 @@
+﻿{
+  "Id": "InstaCharge",
+  "DisplayName": "InstaCharge",
+  "Author": "Orion31",
+  "Version": "1.0",
+  "Requires": [],
+  "Enable": true,
+  "AssemblyName": "InstaCharge.dll",
+  "EntryMethod": "InstaCharge.Patcher.Patch",
+  "Config": {}
+}
