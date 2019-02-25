@@ -21,7 +21,7 @@ namespace InstaCharge
         public void OnConsoleCommand_chargeto(NotificationCenter.Notification n)
         {
             EnergyMixin energyMixin = Inventory.main.GetHeldTool().GetComponent<EnergyMixin>();
-            if (n.data.Count != 1)
+            if (n.data.Count != 1 || n.data == null)
             {
                 ErrorMessage.AddMessage("Usage: chargeto [amount]");
                 return;
