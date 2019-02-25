@@ -54,6 +54,7 @@
     <Compile Include="GUIHandler.cs" />
     <Compile Include="Inject.cs" />
     <Compile Include="InstaChargeCommand.cs" />
+    <Compile Include="Messenger.cs" />
     <Compile Include="Patcher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
